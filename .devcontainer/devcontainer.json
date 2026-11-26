@@ -1,9 +1,12 @@
 {
   "name": "RHCE EX294 practice lab",
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
   "hostRequirements": { "cpus": 2, "memory": "8gb", "storage": "32gb" },
-  "onCreateCommand": "curl -fsSL https://rhce-practice-exam.pages.dev/lab/install.sh | bash",
-  "postStartCommand": "lab autostart || true",
+  "postCreateCommand": "curl -fsSL https://rhce-practice-exam.pages.dev/lab/install.sh | bash",
+  "postStartCommand": "command -v lab >/dev/null && lab autostart || true",
   "forwardPorts": [8294],
   "portsAttributes": {
     "8294": { "label": "RHCE Lab Console", "onAutoForward": "openBrowser" }
